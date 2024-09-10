@@ -1,0 +1,21 @@
+<h1> Heroes </h1>
+<hr>
+<!-- esta creando una lista de descripcion de heroes -->
+<dl>
+  <dt>Nombre: </dt>
+  <dd> {{nombre}} </dd>
+  <dt>Edad </dt>
+  <dd> {{edad}} </dd>
+  <dt>Modoto: </dt>
+  <dd> {{unirNameAndAge()}}  años </dd>
+  <dt>Capitalizado </dt>
+  <dd> {{ capitalizado | uppercase }} </dd>
+</dl>
+
+<button
+*ngIf= cambiarVisible()
+ (click)="cambiarNombre('Irom man')"
+ class="btn btn-primary mx-2">
+ cambiar nombre
+</button>
+<button class="btn btn-primary" (click)="cambiaEdad(90)" >cambiar edad </button>
