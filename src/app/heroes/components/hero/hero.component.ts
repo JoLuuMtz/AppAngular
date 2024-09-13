@@ -61,7 +61,11 @@ export class HeroComponent {
     this.edad = edad;
   }
 
-  cambiarVisible(): void {
-    this.visible = false
+  mostrarBoton(): void {
+    this.visible = false;
   }
+  ocultarBoton(): void {
+    this.visible = true;
+  }
+
 }
