@@ -1,1 +1,15 @@
-<h1>Hola mundo desde page </h1>
+<h1>Dragon Ball Z Main Page</h1>
+<hr>
+
+<div class="row">
+
+  <div class="col">
+    <!-- obtiene mediante el @Input( ) una lista de personajes  de tipo personaje -->
+    <app-list-personaje-dbz [personajeLista]="personajes"> </app-list-personaje-dbz>
+  </div>
+
+  <div class="col">
+    <app-formulario-dbz> </app-formulario-dbz>
+  </div>
+
+</div>
