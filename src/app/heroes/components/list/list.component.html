@@ -2,7 +2,7 @@
 <h1>Lista de heroes </h1>
 
 <hr>
-
+<!-- ngIf permite mostrar o no mostrar un elemento dependiendo de la condicion -->
 <div *ngIf="heroresBorrados; else nothingWasDeleted ">
   <h2>Heroe borrado <small class="text-danger">{{heroresBorrados}}</small></h2>
 </div>
@@ -21,6 +21,7 @@
   Borrar ultimo heroe
 </button>
 
+<!-- nFor permite repetir un elemento html por cada elemento de un array -->
 <ul>
   <li *ngFor="let heroName of heroes">
     {{heroName}}

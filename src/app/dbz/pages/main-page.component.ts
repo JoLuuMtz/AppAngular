@@ -1,5 +1,9 @@
-import { Component, Output } from '@angular/core';
+import { Component } from '@angular/core';
+
 import { Personaje } from '../interfaces/personaje.interface';
+import { DbzService } from '../services/dbz.service';
+
+
 
 @Component({
   selector: 'app-dbz-main-page',
@@ -9,24 +13,22 @@ import { Personaje } from '../interfaces/personaje.interface';
 
 export class MainPageComponent {
 
-  public personajes: Personaje[] = [
-    {
-      nombre: 'Goku',
-      poder: 9500
-    },
-    { nombre: 'Vegeta',
-    poder: 7500},
+  private readonly _dbzService: DbzService;
+
+  constructor(dbzService: DbzService) {
+    this._dbzService = dbzService;
+  }
+
+  public personajes: Personaje[] = [];// lo que reecibe el componente hijo ListaPersonajes
 
 
-  ];
+  Emitor(persona: Personaje): void {
+    // añade un nuevo personaje a la lista
+    this.personajes.push(persona);
+    // this.personajes = [...this.personajes];
 
-
-
-
-
-
+  }
 }
-
 
 
 

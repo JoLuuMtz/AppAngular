@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-@Component({ //  componente
+
+@Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
@@ -33,7 +34,7 @@ export class AppComponent {
     this.counter += 1;
   }
   restar(): void {
-    this.counter -= 1; 
+    this.counter -= 1;
   }
   reset(): void {
     this.counter = 0;

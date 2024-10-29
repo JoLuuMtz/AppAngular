@@ -1,9 +1,27 @@
-<h2> Listado Dragon Balll Z</h2>
-<ul class="list-group">
-  <li class="list-group-item"
-  *ngFor="let  personajes of personajeLista; index as i
-  ">
-     <strong>{{i + 1 }} . </strong> <strong> {{personajes.nombre}} </strong> - <span>{{personajes.poder}}</span>
+<h2> Listado Dragon Ball Z</h2>
 
-  </li>
-</ul>
+<table class="table">
+  <thead>
+    <tr class="l-f">
+      <th>#</th>
+      <th>Nombre</th>
+      <th>Poder</th>
+      <th> 🗑️ </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let personajes of personajeLista; index as i">
+      <td>
+        <strong [ngClass]="{'text-danger': (i + 1) % 2 === 0,
+         'text-warning': (i + 1) % 2 !== 0}">
+          {{ i + 1 }}
+        </strong>
+      </td>
+      <td>{{ personajes.nombre }}</td>
+      <td>{{ personajes.poder }}</td>
+      <td>
+        <button class="btn btn-danger" (click)="DeletePersonaje(i)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

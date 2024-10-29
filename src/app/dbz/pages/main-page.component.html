@@ -4,12 +4,19 @@
 <div class="row">
 
   <div class="col">
+
     <!-- obtiene mediante el @Input( ) una lista de personajes  de tipo personaje -->
-    <app-list-personaje-dbz [personajeLista]="personajes"> </app-list-personaje-dbz>
+
+    <app-list-personaje-dbz [ListaComponentInput]="personajes"> </app-list-personaje-dbz>
+
   </div>
 
   <div class="col">
-    <app-formulario-dbz> </app-formulario-dbz>
+    <!-- emite el evento del formulario con los dato
+     s tipos personaje por medio de @Output -->
+
+    <app-formulario-dbz (Emitor)="Emitor($event)"> </app-formulario-dbz>
+
   </div>
 
 </div>
