@@ -1,0 +1,172 @@
+
+# Fundamentos de angular primeros pasos
+
+## COMPONENTES 
+ - Son un grupo de archivos de html, css y TypeScript, para la creacion de los template
+
+
+## Rutas: 
+	Son las rutas de las conectividad para la navegacion de cada componente
+
+## Directivas:
+
+*IMPORTANTES* 
+- Es el manejo de dom de forma virtual dentro de los template *ndIf *NGfOR *ngSwitch y otos tipos de directivas ngClass etc 
+
+## Servicios: 
+- Es la capa de logica que maneja las clases y  que maneja el consumo de apis  y manipulacion de datos para usarlas en diferentes componentes.
+
+## Modulos: Es el que agrupa todo lo anterior para ser reutilizado en diferentes lugares de la app 
+
+ng new App-name  
+
+para comenzar se le agrega --n--standalone 
+
+
+Modulos:organizacion de modulos por tipo->componentes  de manera que el app.module no se llene de solamente componentes
+
+estructura de un modulo
+-----NombreModulo
+	-----------componentes
+	-----------servicios
+	-----------rutas
+	-----------page
+	-----------interfaces
+	-----------pipes
+{nombreModulo}.module.ts
+
+
+ngtemplate  : <!-- etiqueta o directivca oculta la cual se muestra dependiendo de la condicion  -->
+
+### @input 
+	Permite recibir contenido de un componente padre 
+
+se define el cotenido por medio de @Input() seguido del tipo de variable que obtendra el dato
+
+```javascript
+// componente que recibe
+ @Input('ListaComponentInput') 
+  public personajeLista: Personaje[] = [];
+```
+
+```javascript
+	
+// propiedad del componente padre que manda al hijo los valores 
+ public personajes: Personaje[] = [
+    {
+      nombre: 'kakaroto',
+      poder: 9500
+    },
+    { nombre: 'Majin boo ',
+    poder: 7000},
+    {
+      nombre: 'Vegeta',
+      poder: 8000
+    }
+
+
+  ];
+
+// recibiendo en el html los valores de un padre al hijo por medio de su componente 
+
+    <app-list-personaje-dbz [ListaComponentInput]="personajes"> </app-list-personaje-dbz>
+// componente que se inserta en el componetne padre y por medio de la propiedad del @Input se asignan los valores a la propiedad hijo en el componente hijo. personajes son los valores y la propiedad que los recibe es ListaComponentInput 
+
+
+```
+
+### ngClass 
+
+Es ua directiva de angular coommon donde puede manipular estilos o clases (boostrap o tailwind ) basado en condiciones.
+ejemplos:^
+
+```javascript
+// se le asigna a todos los indices pares la clase text-primary en cual es una clase de estilos de boostrap
+<strong [ngClass]="{'text-primary': (i+1) % 2 === 0}">{{ i + 1 }} . </strong> <strong> {{ personajes.nombre }}
+     </strong> - <span>{{ personajes.poder }}</span>
+ ```	 
+- tambien se puede realizar con clases personalizadas de css
+
+-- estructura [ngClass] = "Clase a aplicar: expresion logica"
+
+### ngModel and FormModule
+ngModel, sirve para capturar los valores por medio de una variable ngModel="varaible" de tipo input, cada input debe tener un atributo name el cual tenga el mismo nombre de la interface para asi asginar valores concisos
+
+-- el FormModule es el modulo que permite crear formularios y no refrescar el navegador en cada subtmit de ahi proviene la directiva ngModel 
+-- (ngSubmit)="Submit()" metodo que permite que enviar los datos por un formulario 
+
+
+```javascript
+
+(ngSubmit)="Submit()"
+
+[(ngModel)]="nuevoPersonaje.poder" name="poder"
+[(ngModel)]="nuevoPersonaje.nombre" name="nombre"
+
+```
+### @Output: Permite que un componente envie o emita valores hacia otros componentes, por medio de un evento 
+
+Utilizando 
+  @Output("Emitor") Emitidor = new EventEmitter< Tipo que recibe >();
+
+se hace el evento quee mite los valores hacia otros para la comunicacion de componentes
+se implementa un evento al compoenten que recibe esas emiciones 
+
+- en este caso el formulario es el que emite el Output, el cual lo recibe el componente main-page, el componente Lista recibe por medio del main page los datos que el formulario hizo OutPut. 
+
+
+
+
+## Servicios en angular 
+
+	
+Los servicios, es esa capa que se encarga de la relacion y la inyeccion de dependencia hacia los componentes haciendo asi la estructura de la logica de negocio por  cada servicio... para usar un servicio en un componente necesitas inyectarlo por medio de DI como un singleton (un solo objeto) 
+
+### Estructura de un servicio  cli ng g s [nombre servicios]
+
+```javascript
+import { Injectable } from '@angular/core';
+
+@Injectable({ // indica que esta clase es un servicio 
+  providedIn: 'root'
+})
+export class PruebaServicesService {
+
+  constructor() { }
+
+}
+```
+
+Inyeccion de dependencias en angular 
+
+Se realiza de mediante el constructor de manera que puedas usar los metodos y propiedades en tu componente 
+
+importas el servicios 
+
+```javascript
+
+
+import { ListadoService } from './../services/listado.service';
+
+
+constructor(public miService : MiServices ){} // se inyecta en el componente de forma publica 
+
+```
+
+Inyeccion con encapsulacion Privada
+
+```javascript
+constructor(private miService : MiServices){}
+
+// ya que es una inyeccion privada no puedes usarla fuera de la clase, asi que si necesitas exportar valores o alguna propiedad conla inyeccion privada, necesitas  crear un metodo/ propiedad get 
+
+- EJEMPLO 
+
+get getRetornoAlgoQueNecesito(): retorno {
+
+return this.loQueQuieroExportarHaciaElexterior
+
+}
+```
+
+
